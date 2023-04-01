@@ -22,7 +22,7 @@ class UsersService {
 
   Future<List> _readJson() async {
     final String response =
-        await rootBundle.loadString('lib/core/helpers/data.json');
+        await rootBundle.loadString('assets/data.json');
     final data = await json.decode(response);
     return data;
   }
