@@ -4,7 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../features/user/data/models/login/params/login_params_model.dart';
 import '../../features/user/data/models/user/user_model.dart';
+import '../helpers/constants.dart';
 
 @injectable
 class UsersService {
@@ -34,7 +36,10 @@ class UsersService {
     return;
   }
 
-  UserModel? getUser(String userId) => users!.firstWhereOrNull((user) => user.guid == userId);
+  UserModel? getUser(String userId) =>
+      users!.firstWhereOrNull((user) => user.guid == userId);
 
-  
+  bool checkLoginInfo(LoginParamsModel params) =>
+      params.username == Constants.username &&
+      params.password == Constants.password;
 }

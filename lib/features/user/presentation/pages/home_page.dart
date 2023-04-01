@@ -18,19 +18,17 @@ class HomePage extends GetWidget<HomeController> {
       Scaffold(appBar: _appBar(context), body: _body(context));
 
   Widget _body(BuildContext context) => Obx(
-        () => controller.loading.value
-            ? ListView(
-                children: [
+        () => ListView(
+          children: controller.loading.value
+              ? [
                   ...Iterable.generate(8, (_) => const UserCardShimmer())
                       .toList(),
-                ],
-              )
-            : ListView(
-                children: [
+                ]
+              : [
                   for (UserModel user in controller.usersList)
                     UserCard(user: user)
                 ],
-              ),
+        ),
       );
 
   PreferredSizeWidget _appBar(BuildContext context) => AppBar(

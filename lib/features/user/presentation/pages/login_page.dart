@@ -14,7 +14,7 @@ class LoginPage extends GetWidget<LoginController> {
         body: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [_form(context), _loginButton(context)],
           ),
         ),
@@ -34,17 +34,19 @@ class LoginPage extends GetWidget<LoginController> {
               validator: controller.passwordValidator,
               placeholder: 'password',
             ),
-            const SizedBox(height: 20),
             _hint(context),
           ],
         ),
       );
 
-  Widget _loginButton(BuildContext context) => Obx(
-        () => CustomButton(
-          label: 'Login',
-          onPressed: () => controller.submitForm(_formKey),
-          loading: controller.loading.value,
+  Widget _loginButton(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 40),
+        child: Obx(
+          () => CustomButton(
+            label: 'Login',
+            onPressed: () => controller.submitForm(_formKey),
+            loading: controller.loading.value,
+          ),
         ),
       );
 

@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/entities/no_params.dart';
 import '../../../../core/error/exceptions.dart';
-import '../../../../core/helpers/constants.dart';
 import '../../../../core/service/users.dart';
 import '../models/get_user/params/get_user_params_model.dart';
 import '../models/get_user/response/get_user_response_model.dart';
@@ -21,8 +20,7 @@ class UserDataSourceIMPL implements UserDataSource {
     /// Fake awaiting time.
     await Future.delayed(const Duration(milliseconds: 700));
 
-    if (params.username == Constants.username &&
-        params.password == Constants.password)
+    if (sl<UsersService>().checkLoginInfo(params))
       return LoginResponseModel(
           sl<UsersService>().users!.firstWhere((element) => element.isOwner));
     else
@@ -38,8 +36,6 @@ class UserDataSourceIMPL implements UserDataSource {
 
   @override
   Future<GetUserResponseModel> getUser(GetUserParamsModel params) async {
-    /// Fake awaiting time.
-    await Future.delayed(const Duration(milliseconds: 100));
     final UserModel? user = sl<UsersService>().getUser(params.userId);
     if (user != null)
       return GetUserResponseModel(user);
